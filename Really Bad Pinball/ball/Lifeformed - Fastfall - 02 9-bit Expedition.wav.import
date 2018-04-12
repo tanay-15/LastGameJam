@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Lifeformed - Fastfall - 02 9-bit Expedition.wav-44b5a46c6f8f0f29ccef32bec179a1de.sample"
+
+[deps]
+
+source_file="res://Lifeformed - Fastfall - 02 9-bit Expedition.wav"
+source_md5="db423fe671cc5b94f5793c41fed3984f"
+
+dest_files=[ "res://.import/Lifeformed - Fastfall - 02 9-bit Expedition.wav-44b5a46c6f8f0f29ccef32bec179a1de.sample" ]
+dest_md5="cab15ff0a37d925336303b3b160ac549"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

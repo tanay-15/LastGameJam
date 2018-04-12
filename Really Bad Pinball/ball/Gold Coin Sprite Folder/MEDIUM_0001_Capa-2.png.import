@@ -1,0 +1,32 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/MEDIUM_0001_Capa-2.png-b73f9682bf5575ea50413fd3d25949d2.stex"
+
+[deps]
+
+source_file="res://Gold Coin Sprite Folder/MEDIUM_0001_Capa-2.png"
+source_md5="562aa0b2ebe8b228a21ef223a62a0ee1"
+
+dest_files=[ "res://.import/MEDIUM_0001_Capa-2.png-b73f9682bf5575ea50413fd3d25949d2.stex" ]
+dest_md5="bec2e5b954b248f88630123bf682379f"
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0

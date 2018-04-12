@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/booster.wav-b8218d62fd522c02b13f4252b24469b5.sample"
+
+[deps]
+
+source_file="res://booster.wav"
+source_md5="68b51b8e6d2e31bbf118431c9c116a5b"
+
+dest_files=[ "res://.import/booster.wav-b8218d62fd522c02b13f4252b24469b5.sample" ]
+dest_md5="29e370bd2bb2a09ecf8de882a046e474"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

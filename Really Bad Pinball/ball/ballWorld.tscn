@@ -1,0 +1,432 @@
+[gd_scene load_steps=31 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://triggeredForce.gd" type="Script" id=2]
+[ext_resource path="res://Camera2D.gd" type="Script" id=3]
+[ext_resource path="res://shield.png" type="Texture" id=4]
+[ext_resource path="res://Node2D.gd" type="Script" id=5]
+[ext_resource path="res://Coin.gd" type="Script" id=6]
+[ext_resource path="res://Gold Coin Sprite Folder/MEDIUM_0000_Capa-1.png" type="Texture" id=7]
+[ext_resource path="res://Gold Coin Sprite Folder/MEDIUM_0001_Capa-2.png" type="Texture" id=8]
+[ext_resource path="res://Gold Coin Sprite Folder/MEDIUM_0002_Capa-3.png" type="Texture" id=9]
+[ext_resource path="res://Gold Coin Sprite Folder/MEDIUM_0003_Capa-4.png" type="Texture" id=10]
+[ext_resource path="res://Gold Coin Sprite Folder/MEDIUM_0004_Capa-5.png" type="Texture" id=11]
+[ext_resource path="res://Gold Coin Sprite Folder/MEDIUM_0005_Capa-6.png" type="Texture" id=12]
+[ext_resource path="res://Gold Coin Sprite Folder/MEDIUM_0006_Capa-7.png" type="Texture" id=13]
+[ext_resource path="res://Gold Coin Sprite Folder/MEDIUM_0007_Capa-8.png" type="Texture" id=14]
+[ext_resource path="res://right.png" type="Texture" id=15]
+[ext_resource path="res://left.png" type="Texture" id=16]
+[ext_resource path="res://up.png" type="Texture" id=17]
+[ext_resource path="res://down.png" type="Texture" id=18]
+[ext_resource path="res://Tileset0.tres" type="TileSet" id=19]
+[ext_resource path="res://Lifeformed - Fastfall - 02 9-bit Expedition.wav" type="AudioStream" id=20]
+[ext_resource path="res://booster.wav" type="AudioStream" id=21]
+[ext_resource path="res://collectCoin.wav" type="AudioStream" id=22]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 26.921
+
+[sub_resource type="CircleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 23.1635
+
+[sub_resource type="CircleShape2D" id=3]
+
+custom_solver_bias = 0.0
+radius = 19.9304
+
+[sub_resource type="SpriteFrames" id=4]
+
+animations = [ {
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "idle",
+"speed": 12.85
+} ]
+
+[sub_resource type="CircleShape2D" id=5]
+
+custom_solver_bias = 0.0
+radius = 47.8584
+
+[sub_resource type="CircleShape2D" id=6]
+
+custom_solver_bias = 0.0
+radius = 125.838
+
+[sub_resource type="CircleShape2D" id=7]
+
+custom_solver_bias = 0.0
+radius = 36.8116
+
+[sub_resource type="CircleShape2D" id=8]
+
+custom_solver_bias = 0.0
+radius = 18.1309
+
+[node name="World" type="Node"]
+
+script = ExtResource( 1 )
+
+[node name="Ball" type="RigidBody2D" parent="." index="0"]
+
+position = Vector2( -339.983, -133.701 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+mode = 0
+mass = 6.0
+friction = 0.7
+bounce = 0.9
+gravity_scale = 5.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
+angular_velocity = 0.0
+angular_damp = -1.0
+script = ExtResource( 2 )
+_sections_unfolded = [ "Linear", "Transform" ]
+
+[node name="Camera2D2" type="Camera2D" parent="Ball" index="0"]
+
+position = Vector2( 28.8105, 185.185 )
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = false
+drag_margin_v_enabled = true
+smoothing_enabled = true
+smoothing_speed = 3.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.3
+drag_margin_top = 0.3
+drag_margin_right = 0.3
+drag_margin_bottom = 0.3
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+script = ExtResource( 3 )
+_sections_unfolded = [ "Drag Margin", "Limit", "Smoothing", "Visibility" ]
+
+[node name="Sprite" type="Sprite" parent="Ball" index="1"]
+
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball" index="2"]
+
+shape = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="Ball" index="3"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball/Area2D" index="0"]
+
+shape = SubResource( 2 )
+
+[node name="Board" type="Node2D" parent="." index="1"]
+
+editor/display_folded = true
+script = ExtResource( 5 )
+saveRotation = 0.0
+
+[node name="Coin" type="Area2D" parent="Board" index="0"]
+
+editor/display_folded = true
+position = Vector2( 530.967, 513.814 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 6 )
+isCoin = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Board/Coin" index="0"]
+
+shape = SubResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Board/Coin" index="1"]
+
+frames = SubResource( 4 )
+animation = "idle"
+frame = 6
+playing = true
+
+[node name="Coin2" type="Area2D" parent="Board" index="1"]
+
+editor/display_folded = true
+position = Vector2( 2152.25, 2221.96 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 6 )
+isCoin = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Board/Coin2" index="0"]
+
+shape = SubResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Board/Coin2" index="1"]
+
+frames = SubResource( 4 )
+animation = "idle"
+frame = 6
+playing = true
+
+[node name="goRight" type="Area2D" parent="Board" index="2"]
+
+editor/display_folded = true
+position = Vector2( 757.345, 956.141 )
+scale = Vector2( 0.937622, 1.01092 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="Sprite" type="Sprite" parent="Board/goRight" index="0"]
+
+position = Vector2( -2.12372, -0.598083 )
+scale = Vector2( 0.0683189, 0.0646009 )
+texture = ExtResource( 15 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Board/goRight" index="1"]
+
+position = Vector2( -1.68176, -0.494263 )
+shape = SubResource( 5 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="goLeft" type="Area2D" parent="Board" index="3"]
+
+editor/display_folded = true
+position = Vector2( 2161.7, 1375.38 )
+scale = Vector2( 1.12433, 1.2669 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision", "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Board/goLeft" index="0"]
+
+position = Vector2( -1.83215, 4.03821 )
+scale = Vector2( 0.0598436, 0.0513549 )
+texture = ExtResource( 16 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Board/goLeft" index="1"]
+
+position = Vector2( -1.43588, 4.51407 )
+scale = Vector2( 0.373015, 0.333705 )
+shape = SubResource( 6 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="goUp" type="Area2D" parent="Board" index="4"]
+
+editor/display_folded = true
+position = Vector2( 851.494, 2216.56 )
+rotation = 0.0110866
+scale = Vector2( 1.33963, 1.37502 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision", "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Board/goUp" index="0"]
+
+position = Vector2( -0.505981, 0.832458 )
+scale = Vector2( 0.0487492, 0.0474946 )
+texture = ExtResource( 17 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Board/goUp" index="1"]
+
+position = Vector2( -0.527652, 0.723585 )
+scale = Vector2( 0.974658, 0.968326 )
+shape = SubResource( 7 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="goUp2" type="Area2D" parent="Board" index="5"]
+
+editor/display_folded = true
+position = Vector2( 2214.16, 1804.59 )
+rotation = 0.0110866
+scale = Vector2( 1.33963, 1.37502 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision", "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Board/goUp2" index="0"]
+
+position = Vector2( -0.505981, 0.832458 )
+scale = Vector2( 0.0487492, 0.0474946 )
+texture = ExtResource( 17 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Board/goUp2" index="1"]
+
+position = Vector2( -0.527652, 0.723585 )
+scale = Vector2( 0.974658, 0.968326 )
+shape = SubResource( 7 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="goDown" type="Area2D" parent="Board" index="6"]
+
+editor/display_folded = true
+position = Vector2( 1820.31, -27.1044 )
+scale = Vector2( 1.77049, 1.56832 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Board/goDown" index="0"]
+
+position = Vector2( -4.36978, -10.5479 )
+scale = Vector2( 0.0368859, 0.0416409 )
+texture = ExtResource( 18 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Board/goDown" index="1"]
+
+position = Vector2( -4.12775, -10.7069 )
+scale = Vector2( 1.41147, 1.67963 )
+shape = SubResource( 8 )
+
+[node name="TileMap" type="TileMap" parent="Board" index="7"]
+
+position = Vector2( -483.88, -282.973 )
+mode = 0
+tile_set = ExtResource( 19 )
+cell_size = Vector2( 64, 64 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( 0, 10, 0, 1, 10, 0, 2, 10, 0, 3, 10, 0, 4, 10, 0, 5, 10, 0, 6, 10, 0, 7, 10, 0, 8, 10, 0, 9, 10, 0, 10, 10, 0, 11, 10, 0, 12, 10, 0, 13, 10, 0, 14, 10, 0, 15, 10, 0, 16, 10, 0, 17, 10, 0, 18, 10, 0, 19, 10, 0, 20, 10, 0, 21, 10, 0, 22, 10, 0, 23, 10, 0, 24, 10, 0, 25, 10, 0, 26, 10, 0, 27, 10, 0, 28, 10, 0, 29, 10, 0, 30, 10, 0, 31, 10, 0, 32, 10, 0, 33, 10, 0, 34, 10, 0, 35, 10, 0, 36, 10, 0, 37, 10, 0, 38, 10, 0, 39, 10, 0, 40, 10, 0, 41, 10, 0, 42, 10, 0, 43, 10, 0, 44, 10, 0, 65536, 10, 0, 65540, 10, 0, 65550, 10, 0, 65564, 10, 0, 65580, 10, 0, 131072, 10, 0, 131076, 10, 0, 131086, 10, 0, 131100, 10, 0, 131116, 10, 0, 196608, 10, 0, 196612, 10, 0, 196622, 10, 0, 196636, 10, 0, 196652, 10, 0, 262144, 10, 0, 262148, 10, 0, 262149, 10, 0, 262150, 10, 0, 262151, 10, 0, 262152, 10, 0, 262153, 10, 0, 262154, 10, 0, 262158, 10, 0, 262172, 10, 0, 262188, 10, 0, 327680, 10, 0, 327684, 10, 0, 327690, 10, 0, 327694, 10, 0, 327708, 10, 0, 327724, 10, 0, 393216, 10, 0, 393220, 10, 0, 393226, 10, 0, 393230, 10, 0, 393234, 10, 0, 393238, 10, 0, 393244, 10, 0, 393245, 10, 0, 393246, 10, 0, 393247, 10, 0, 393248, 10, 0, 393249, 10, 0, 393254, 10, 0, 393260, 10, 0, 458752, 10, 0, 458756, 10, 0, 458762, 10, 0, 458766, 10, 0, 458770, 10, 0, 458774, 10, 0, 458790, 10, 0, 458796, 10, 0, 524288, 10, 0, 524292, 10, 0, 524298, 10, 0, 524302, 10, 0, 524306, 10, 0, 524310, 10, 0, 524326, 10, 0, 524332, 10, 0, 589824, 10, 0, 589834, 10, 0, 589842, 10, 0, 589846, 10, 0, 589862, 10, 0, 589868, 10, 0, 655360, 10, 0, 655370, 10, 0, 655378, 10, 0, 655382, 10, 0, 655398, 10, 0, 655404, 10, 0, 720896, 10, 0, 720914, 10, 0, 720918, 10, 0, 720919, 10, 0, 720920, 10, 0, 720921, 10, 0, 720922, 10, 0, 720923, 10, 0, 720924, 10, 0, 720925, 10, 0, 720934, 10, 0, 720935, 10, 0, 720936, 10, 0, 720937, 10, 0, 720940, 10, 0, 786432, 10, 0, 786450, 10, 0, 786461, 10, 0, 786476, 10, 0, 851968, 10, 0, 851986, 10, 0, 851997, 10, 0, 852012, 10, 0, 917504, 10, 0, 917522, 10, 0, 917533, 10, 0, 917548, 10, 0, 983040, 10, 0, 983044, 10, 0, 983045, 10, 0, 983046, 10, 0, 983047, 10, 0, 983048, 10, 0, 983053, 10, 0, 983054, 10, 0, 983055, 10, 0, 983056, 10, 0, 983057, 10, 0, 983058, 10, 0, 983059, 10, 0, 983060, 10, 0, 983061, 10, 0, 983062, 10, 0, 983069, 10, 0, 983070, 10, 0, 983071, 10, 0, 983072, 10, 0, 983073, 10, 0, 983084, 10, 0, 1048576, 10, 0, 1048580, 10, 0, 1048584, 10, 0, 1048620, 10, 0, 1114112, 10, 0, 1114116, 10, 0, 1114120, 10, 0, 1114150, 10, 0, 1114151, 10, 0, 1114152, 10, 0, 1114153, 10, 0, 1114156, 10, 0, 1179648, 10, 0, 1179649, 10, 0, 1179650, 10, 0, 1179651, 10, 0, 1179652, 10, 0, 1179656, 10, 0, 1179664, 10, 0, 1179686, 10, 0, 1179692, 10, 0, 1245184, 10, 0, 1245192, 10, 0, 1245200, 10, 0, 1245222, 10, 0, 1245228, 10, 0, 1310720, 10, 0, 1310728, 10, 0, 1310736, 10, 0, 1310758, 10, 0, 1310764, 10, 0, 1376256, 10, 0, 1376264, 10, 0, 1376272, 10, 0, 1376294, 10, 0, 1376300, 10, 0, 1441792, 10, 0, 1441800, 10, 0, 1441808, 10, 0, 1441830, 10, 0, 1441836, 10, 0, 1507328, 10, 0, 1507336, 10, 0, 1507337, 10, 0, 1507338, 10, 0, 1507339, 10, 0, 1507340, 10, 0, 1507341, 10, 0, 1507342, 10, 0, 1507343, 10, 0, 1507344, 10, 0, 1507345, 10, 0, 1507346, 10, 0, 1507347, 10, 0, 1507348, 10, 0, 1507349, 10, 0, 1507350, 10, 0, 1507351, 10, 0, 1507352, 10, 0, 1507357, 10, 0, 1507366, 10, 0, 1507372, 10, 0, 1572864, 10, 0, 1572888, 10, 0, 1572893, 10, 0, 1572908, 10, 0, 1638400, 10, 0, 1638401, 10, 0, 1638402, 10, 0, 1638403, 10, 0, 1638404, 10, 0, 1638405, 10, 0, 1638424, 10, 0, 1638429, 10, 0, 1638430, 10, 0, 1638431, 10, 0, 1638432, 10, 0, 1638433, 10, 0, 1638434, 10, 0, 1638444, 10, 0, 1703936, 10, 0, 1703960, 10, 0, 1703965, 10, 0, 1703980, 10, 0, 1769472, 10, 0, 1769496, 10, 0, 1769501, 10, 0, 1769516, 10, 0, 1835008, 10, 0, 1835032, 10, 0, 1835037, 10, 0, 1835052, 10, 0, 1900544, 10, 0, 1900553, 10, 0, 1900568, 10, 0, 1900569, 10, 0, 1900570, 10, 0, 1900571, 10, 0, 1900572, 10, 0, 1900573, 10, 0, 1900582, 10, 0, 1900588, 10, 0, 1966080, 10, 0, 1966081, 10, 0, 1966082, 10, 0, 1966083, 10, 0, 1966084, 10, 0, 1966089, 10, 0, 1966099, 10, 0, 1966106, 10, 0, 1966118, 10, 0, 1966124, 10, 0, 2031616, 10, 0, 2031625, 10, 0, 2031635, 10, 0, 2031642, 10, 0, 2031654, 10, 0, 2031660, 10, 0, 2097152, 10, 0, 2097161, 10, 0, 2097171, 10, 0, 2097178, 10, 0, 2097190, 10, 0, 2097196, 10, 0, 2162688, 10, 0, 2162697, 10, 0, 2162707, 10, 0, 2162714, 10, 0, 2162718, 10, 0, 2162721, 10, 0, 2162726, 10, 0, 2162732, 10, 0, 2228224, 10, 0, 2228233, 10, 0, 2228243, 10, 0, 2228250, 10, 0, 2228257, 10, 0, 2228262, 10, 0, 2228263, 10, 0, 2228264, 10, 0, 2228265, 10, 0, 2228266, 10, 0, 2228267, 10, 0, 2228268, 10, 0, 2293760, 10, 0, 2293769, 10, 0, 2293770, 10, 0, 2293771, 10, 0, 2293772, 10, 0, 2293773, 10, 0, 2293774, 10, 0, 2293775, 10, 0, 2293776, 10, 0, 2293777, 10, 0, 2293778, 10, 0, 2293779, 10, 0, 2293786, 10, 0, 2293793, 10, 0, 2293804, 10, 0, 2359296, 10, 0, 2359308, 10, 0, 2359322, 10, 0, 2359329, 10, 0, 2359340, 10, 0, 2424832, 10, 0, 2424844, 10, 0, 2424865, 10, 0, 2424876, 10, 0, 2490368, 10, 0, 2490380, 10, 0, 2490400, 0, 0, 2490401, 10, 0, 2490412, 10, 0, 2555904, 10, 0, 2555935, 0, 0, 2555936, 0, 0, 2555937, 10, 0, 2555948, 10, 0, 2621440, 10, 0, 2621470, 0, 0, 2621471, 0, 0, 2621472, 0, 0, 2621473, 10, 0, 2621484, 10, 0, 2686976, 10, 0, 2686977, 10, 0, 2686978, 10, 0, 2686979, 10, 0, 2686980, 10, 0, 2686981, 10, 0, 2686982, 10, 0, 2686983, 10, 0, 2686984, 10, 0, 2686985, 10, 0, 2686986, 10, 0, 2686987, 10, 0, 2686988, 10, 0, 2686989, 10, 0, 2686990, 10, 0, 2686991, 10, 0, 2686992, 10, 0, 2686993, 10, 0, 2686994, 10, 0, 2686995, 10, 0, 2686996, 10, 0, 2686997, 10, 0, 2686998, 10, 0, 2686999, 10, 0, 2687000, 10, 0, 2687001, 10, 0, 2687002, 10, 0, 2687003, 10, 0, 2687004, 10, 0, 2687005, 10, 0, 2687006, 10, 0, 2687007, 10, 0, 2687008, 10, 0, 2687009, 10, 0, 2687010, 10, 0, 2687011, 10, 0, 2687012, 10, 0, 2687013, 10, 0, 2687014, 10, 0, 2687015, 10, 0, 2687016, 10, 0, 2687017, 10, 0, 2687018, 10, 0, 2687019, 10, 0, 2687020, 10, 0 )
+_sections_unfolded = [ "Cell", "Transform" ]
+
+[node name="Music" type="AudioStreamPlayer2D" parent="." index="2"]
+
+stream = ExtResource( 20 )
+volume_db = 0.0
+autoplay = true
+max_distance = 10000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[node name="BoostSound" type="AudioStreamPlayer" parent="." index="3"]
+
+stream = ExtResource( 21 )
+volume_db = 0.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="CollectCoinSound" type="AudioStreamPlayer" parent="." index="4"]
+
+stream = ExtResource( 22 )
+volume_db = 0.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[connection signal="slowingDown" from="Ball" to="Ball/Camera2D2" method="_on_Ball_slowingDown"]
+
+[connection signal="speedingUp" from="Ball" to="Ball/Camera2D2" method="_on_Ball_speedingUp"]
+
+[connection signal="area_entered" from="Board/Coin" to="Board/Coin" method="_on_Coin_area_entered"]
+
+[connection signal="area_entered" from="Board/Coin2" to="Board/Coin2" method="_on_Coin_area_entered"]
+
+[connection signal="body_entered" from="Board/goRight" to="Ball" method="_on_Area2D_body_entered_Right"]
+
+[connection signal="body_exited" from="Board/goRight" to="Ball" method="_on_goRight_body_exited"]
+
+[connection signal="body_entered" from="Board/goLeft" to="Ball" method="_on_Area2D_body_entered_Left"]
+
+[connection signal="body_exited" from="Board/goLeft" to="Ball" method="_on_goLeft_body_exited"]
+
+[connection signal="body_entered" from="Board/goUp" to="Ball" method="_on_Area2D_body_entered_Up"]
+
+[connection signal="body_exited" from="Board/goUp" to="Ball" method="_on_goUp_body_exited"]
+
+[connection signal="body_entered" from="Board/goUp2" to="Ball" method="_on_Area2D_body_entered_Up"]
+
+[connection signal="body_exited" from="Board/goUp2" to="Ball" method="_on_goUp_body_exited"]
+
+[connection signal="body_entered" from="Board/goDown" to="Ball" method="_on_Area2D_body_entered_Down"]
+
+[connection signal="body_exited" from="Board/goDown" to="Ball" method="_on_goDown_body_exited"]
+
+
