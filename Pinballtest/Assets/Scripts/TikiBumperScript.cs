@@ -12,7 +12,7 @@ public class TikiBumperScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        rot += 0.01f;
+        rot += Time.deltaTime * 0.1f;
         transform.Rotate(new Vector3(0,0,rot));
 	}
 }
