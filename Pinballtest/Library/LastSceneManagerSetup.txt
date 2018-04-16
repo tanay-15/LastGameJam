@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/Tanaytest.unity
+- path: Assets/Scene/RahulTest.unity
   isLoaded: 1
   isActive: 1
