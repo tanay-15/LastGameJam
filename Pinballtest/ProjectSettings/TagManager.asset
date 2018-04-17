@@ -8,6 +8,9 @@ TagManager:
   - upTrigger
   - leftTrigger
   - downTrigger
+  - Ground
+  - Obstacle
+  - Coin
   layers:
   - Default
   - TransparentFX

@@ -15,4 +15,5 @@ public class TikiBumperScript : MonoBehaviour {
         rot += Time.deltaTime * 0.1f;
         transform.Rotate(new Vector3(0,0,rot));
 	}
+
 }
