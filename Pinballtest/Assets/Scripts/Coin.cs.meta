@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c3148d74b7aa60e41bda7ef702dabd97
+timeCreated: 1523922712
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - coinParticlesPrefab: {fileID: 1708555795406356, guid: 1d36f2b8576971c4da0095e9453e8e06,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

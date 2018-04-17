@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/RahulTest.unity
+- path: Assets/Scene/Josh_CoinCounterTest.unity
   isLoaded: 1
   isActive: 1
