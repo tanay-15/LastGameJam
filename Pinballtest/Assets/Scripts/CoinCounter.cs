@@ -23,7 +23,7 @@ public class CoinCounter : MonoBehaviour {
 
     void UpdateText()
     {
-        text.text = "x " + coinCount.ToString();
+        text.text = "Score: " + coinCount.ToString();
     }
 	
 	void Update () {

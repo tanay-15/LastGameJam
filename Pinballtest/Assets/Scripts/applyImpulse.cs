@@ -9,7 +9,8 @@ public class applyImpulse : MonoBehaviour {
     private bool downTrigger;
     private bool leftTrigger;
     private Rigidbody2D rb;
-    private float thrust = 1000f;
+    //private float thrust = 1000f;
+   // private Vector2 thrust;
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody2D>();	
@@ -73,18 +74,18 @@ public class applyImpulse : MonoBehaviour {
 
     void goRight()
     {
-        rb.AddForce(transform.right * thrust);
+        rb.AddForce(new Vector2(100.0f, 0),ForceMode2D.Impulse );
     }
     void goUp()
     {
-        rb.AddForce(transform.up * thrust);
+        rb.AddForce(new Vector2(0, 100.0f), ForceMode2D.Impulse);
     }
     void goLeft()
     {
-        rb.AddForce( -(transform.right * thrust));
+        rb.AddForce(new Vector2(-100, 0), ForceMode2D.Impulse);
     }
     void goDown()
     {
-        rb.AddForce(-transform.up * thrust);
+        rb.AddForce(new Vector2(0, -100.0f), ForceMode2D.Impulse);
     }
 }
