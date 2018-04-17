@@ -59,7 +59,12 @@ public class TitleScreen : MonoBehaviour {
         switch (newState)
         {
             case MenuState.MainMenu:
-                //SetListText("Start", "Options", "Exit");
+                state = MenuState.Transition;
+                yield return MoveCurrentMenu(1, true);
+                SetListText("Start", "Options", "Exit");
+                yield return MoveCurrentMenu(-1, false);
+                currentIndex = 0;
+                state = MenuState.MainMenu;
                 break;
 
             case MenuState.OptionsMenu:
@@ -255,6 +260,11 @@ public class TitleScreen : MonoBehaviour {
         {
             CheckForUpAndDownArrows();
             ScaleTextAndSetColors();
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                StartCoroutine(ChangeMenu(MenuState.MainMenu));
+            }
         }
 	}
 }
