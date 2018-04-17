@@ -17,7 +17,8 @@ public class CoinCounter : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-        coinCount = FindObjectsOfType<Coin>().Length;
+        //coinCount = FindObjectsOfType<Coin>().Length;
+        coinCount = 0;
         UpdateText();
 	}
 
@@ -32,7 +33,7 @@ public class CoinCounter : MonoBehaviour {
 
     public void DeleteCoin()
     {
-        coinCount--;
+        coinCount++;
         UpdateText();
     }
 }

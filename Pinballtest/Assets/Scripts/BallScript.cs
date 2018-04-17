@@ -21,7 +21,7 @@ public class BallScript : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-        rb2d.AddForce(-10 * transform.up);
+        rb2d.AddForce(-10 * transform.up * Time.deltaTime * 60f);
 
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -46,7 +46,7 @@ public class BallScript : MonoBehaviour {
 			SoundChange (1);
         }
 
-        transform.Rotate(new Vector3(0, 0, rot));
+        transform.Rotate(new Vector3(0, 0, rot * Time.deltaTime * 60f));
     }
 
 	void SoundChange(int temp)
@@ -69,7 +69,7 @@ public class BallScript : MonoBehaviour {
 			SoundChange (3);
 			Debug.Log ("Sound Changed");
 			Destroy (other.gameObject);
-			Instantiate(coinParticlesPrefab, other.gameObject.transform.position, other.gameObject.transform.rotation);
+			//Instantiate(coinParticlesPrefab, other.gameObject.transform.position, other.gameObject.transform.rotation);
 		}
 	}
 }

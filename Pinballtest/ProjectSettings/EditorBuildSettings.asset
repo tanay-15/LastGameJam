@@ -4,4 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scene/TitleScreen.unity
+    guid: cfae886a1154a1447894d3a8fff89e6b
+  - enabled: 1
+    path: Assets/Scene/KunalLevel2Scene.unity
+    guid: 47d3ce4d86663724c8085c93bc09b0a7

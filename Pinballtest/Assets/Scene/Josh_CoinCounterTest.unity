@@ -992,6 +992,11 @@ Prefab:
       propertyPath: m_Name
       value: Coin (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 58158702109227284, guid: 554c2f876ad522944a272fa2432c43ee,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 554c2f876ad522944a272fa2432c43ee, type: 2}
   m_IsPrefabParent: 0
@@ -2362,6 +2367,11 @@ Prefab:
       propertyPath: m_Name
       value: Coin (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 58158702109227284, guid: 554c2f876ad522944a272fa2432c43ee,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 554c2f876ad522944a272fa2432c43ee, type: 2}
   m_IsPrefabParent: 0
@@ -2738,6 +2748,11 @@ Prefab:
     - target: {fileID: 4292236134474786, guid: 554c2f876ad522944a272fa2432c43ee, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 58158702109227284, guid: 554c2f876ad522944a272fa2432c43ee,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 554c2f876ad522944a272fa2432c43ee, type: 2}
@@ -5234,6 +5249,11 @@ Prefab:
       propertyPath: m_Name
       value: Coin (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 58158702109227284, guid: 554c2f876ad522944a272fa2432c43ee,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 554c2f876ad522944a272fa2432c43ee, type: 2}
   m_IsPrefabParent: 0
@@ -5981,6 +6001,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e338f44f01440ed4b9d282ebdde4abd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MusicSource: {fileID: 0}
+  MusicClips: []
+  coinParticlesPrefab: {fileID: 0}
 --- !u!1 &2002956869
 GameObject:
   m_ObjectHideFlags: 0

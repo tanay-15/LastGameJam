@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 enum MenuState
@@ -20,9 +21,13 @@ public class TitleScreen : MonoBehaviour {
     [SerializeField] GameObject menuList;
     [SerializeField] Transform canvasCenter;
     [SerializeField] Text[] menuListText;
+    [SerializeField] Text[] menuListText2;
     [SerializeField] Transform titleTextStartPosition;
     [SerializeField] Transform titleTextEndPosition;
     [SerializeField] AnimationCurve titleTextMoveCurve;
+
+    string[] MainMenuListText = { "Start", "Options", "Exit" };
+    string[] optionsMenuListText = { "Resolution", "Display", "VSync" };
 
     int menuListSize;
     int currentIndex;
@@ -33,22 +38,48 @@ public class TitleScreen : MonoBehaviour {
         state = MenuState.PressAnyKey;
         menuListSize = 0;
         currentIndex = 0;
+
+        //foreach(Resolution r in Screen.resolutions)
+        //{
+        //    Debug.Log(r.width + " x " + r.height + " " + r.refreshRate + "Hz");
+        //}
 	}
 
-    void SetListText(params string[] text)
+    void SetListText(Text[] menuList, bool setListSize, params string[] text)
     {
-        menuListSize = text.Length;
-        for (int i = 0; i < menuListText.Length; i++)
+        if (setListSize)
+            menuListSize = text.Length;
+        for (int i = 0; i < menuList.Length; i++)
         {
-            if (i < menuListSize)
+            if (i < text.Length)
             {
-                menuListText[i].text = text[i];
+                menuList[i].text = text[i];
             }
             else
             {
-                menuListText[i].text = "";
+                menuList[i].text = "";
             }
         }
+    }
+
+    bool ConfirmKeyPressed()
+    {
+        return (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return));
+    }
+
+    bool BackKeyPressed()
+    {
+        return (Input.GetKeyDown(KeyCode.Escape));
+    }
+
+    bool UpKeyPressed()
+    {
+        return (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W));
+    }
+
+    bool DownKeyPressed()
+    {
+        return (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S));
     }
 
     IEnumerator ChangeMenu(MenuState newState)
@@ -61,16 +92,21 @@ public class TitleScreen : MonoBehaviour {
             case MenuState.MainMenu:
                 state = MenuState.Transition;
                 yield return MoveCurrentMenu(1, true);
-                SetListText("Start", "Options", "Exit");
+                SetListText(menuListText, true, MainMenuListText);
+                SetListText(menuListText2, false);
                 yield return MoveCurrentMenu(-1, false);
                 currentIndex = 0;
                 state = MenuState.MainMenu;
                 break;
 
             case MenuState.OptionsMenu:
+                string resolutionString = string.Format("{0} x {1}, {2}Hz", Screen.width.ToString(), Screen.height.ToString(), Screen.currentResolution.refreshRate.ToString());
+                string displayString = Screen.fullScreen ? "Fullscreen" : "Windowed";
+                string vSyncString = (QualitySettings.vSyncCount == 1) ? "On" : "Off";
                 state = MenuState.Transition;
                 yield return MoveCurrentMenu(-1, true);
-                SetListText("Hi", "Hello");
+                SetListText(menuListText, true, optionsMenuListText);
+                SetListText(menuListText2, false, resolutionString, displayString, vSyncString);
                 yield return MoveCurrentMenu(1, false);
                 currentIndex = 0;
                 state = MenuState.OptionsMenu;
@@ -101,7 +137,8 @@ public class TitleScreen : MonoBehaviour {
     {
         yield return DeletePressAnyKeyText();
         yield return MoveUpTitle();
-        SetListText("Start", "Options", "Exit");
+        SetListText(menuListText, true, MainMenuListText);
+        SetListText(menuListText2, false);
         yield return FadeInMenuList();
         state = MenuState.MainMenu;
     }
@@ -189,22 +226,26 @@ public class TitleScreen : MonoBehaviour {
     {
         if (menuListText[currentIndex].text == "Start")
         {
-
+            SceneManager.LoadScene("KunalLevel2Scene");
         }
         else if (menuListText[currentIndex].text == "Options")
         {
             StartCoroutine(ChangeMenu(MenuState.OptionsMenu));
         }
+        else if (menuListText[currentIndex].text == "Exit")
+        {
+            Application.Quit();
+        }
     }
 
     void CheckForUpAndDownArrows()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+        if (UpKeyPressed())
         {
             currentIndex--;
             currentIndex = (currentIndex < 0) ? currentIndex + menuListSize : currentIndex;
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+        if (DownKeyPressed())
         {
             currentIndex++;
             currentIndex = (currentIndex >= menuListSize) ? currentIndex - menuListSize : currentIndex;
@@ -246,9 +287,14 @@ public class TitleScreen : MonoBehaviour {
             //Check for up and down arrow input
             CheckForUpAndDownArrows();
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (ConfirmKeyPressed())
             {
                 MainMenuConfirm();
+            }
+            if (BackKeyPressed())
+            {
+                //Go to the exit option
+                currentIndex = 2;
             }
 
             //Set the colors
@@ -261,7 +307,7 @@ public class TitleScreen : MonoBehaviour {
             CheckForUpAndDownArrows();
             ScaleTextAndSetColors();
 
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (BackKeyPressed())
             {
                 StartCoroutine(ChangeMenu(MenuState.MainMenu));
             }

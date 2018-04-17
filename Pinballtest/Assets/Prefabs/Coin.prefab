@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212829726715694102}
   - component: {fileID: 95359645723357540}
   - component: {fileID: 58158702109227284}
+  - component: {fileID: 114633441639344112}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Coin
@@ -74,6 +75,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114633441639344112
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1368006636556904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3148d74b7aa60e41bda7ef702dabd97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinParticlesPrefab: {fileID: 1708555795406356, guid: 1d36f2b8576971c4da0095e9453e8e06,
+    type: 2}
 --- !u!212 &212829726715694102
 SpriteRenderer:
   m_ObjectHideFlags: 1
