@@ -17,6 +17,8 @@ public class TitleScreen : MonoBehaviour {
     float time = 0f;
     [SerializeField] GameObject startText;
     [SerializeField] GameObject titleText;
+    [SerializeField] GameObject menuList;
+    [SerializeField] Transform canvasCenter;
     [SerializeField] Text[] menuListText;
     [SerializeField] Transform titleTextStartPosition;
     [SerializeField] Transform titleTextEndPosition;
@@ -49,29 +51,52 @@ public class TitleScreen : MonoBehaviour {
         }
     }
 
-    void ChangeMenu(MenuState newState, bool setState)
+    IEnumerator ChangeMenu(MenuState newState)
     {
         if (state == newState)
-            return;
+            yield return 0;
 
         switch (newState)
         {
             case MenuState.MainMenu:
-                SetListText("Start", "Options", "Exit");
+                //SetListText("Start", "Options", "Exit");
                 break;
 
             case MenuState.OptionsMenu:
+                state = MenuState.Transition;
+                yield return MoveCurrentMenu(-1, true);
+                SetListText("Hi", "Hello");
+                yield return MoveCurrentMenu(1, false);
+                currentIndex = 0;
+                state = MenuState.OptionsMenu;
                 break;
         }
-        if (setState)
-            state = newState;
+    }
+
+    IEnumerator MoveCurrentMenu(float side, bool fadeOut)
+    {
+        Vector3 startPosition = canvasCenter.position;
+        Vector3 newPosition = startPosition + new Vector3(side * 1 * 100f, 0f, 0f);
+        for (float i = 0f; i <= 1f; i += Time.deltaTime * 5f, i = Mathf.Min(1f, i))
+        {
+            float t = (fadeOut) ? i : (1f - i);
+            menuList.transform.position = Vector3.Lerp(startPosition, newPosition, t);
+            Color newColor = Color.Lerp(Color.white, transparent, t);
+            foreach(Text text in menuList.GetComponentsInChildren<Text>())
+            {
+                text.color = newColor;
+            }
+            if (i == 1)
+                break;
+            yield return 0;
+        }
     }
 
     IEnumerator TransitionToMainMenu()
     {
         yield return DeletePressAnyKeyText();
         yield return MoveUpTitle();
-        ChangeMenu(MenuState.MainMenu, false);
+        SetListText("Start", "Options", "Exit");
         yield return FadeInMenuList();
         state = MenuState.MainMenu;
     }
@@ -155,8 +180,49 @@ public class TitleScreen : MonoBehaviour {
         float i = (text.gameObject.transform.localScale.x - 1f) * 2f;
         text.color = Color.Lerp(Color.white, Color.yellow, i);
     }
-	
-	void Update () {
+    void MainMenuConfirm()
+    {
+        if (menuListText[currentIndex].text == "Start")
+        {
+
+        }
+        else if (menuListText[currentIndex].text == "Options")
+        {
+            StartCoroutine(ChangeMenu(MenuState.OptionsMenu));
+        }
+    }
+
+    void CheckForUpAndDownArrows()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+        {
+            currentIndex--;
+            currentIndex = (currentIndex < 0) ? currentIndex + menuListSize : currentIndex;
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+        {
+            currentIndex++;
+            currentIndex = (currentIndex >= menuListSize) ? currentIndex - menuListSize : currentIndex;
+        }
+    }
+
+    void ScaleTextAndSetColors()
+    {
+        for (int i = 0; i < menuListSize; i++)
+        {
+            if (i == currentIndex)
+            {
+                ScaleTextUp(menuListText[i]);
+            }
+            else
+            {
+                ScaleTextDown(menuListText[i]);
+            }
+            SetTextColorFromScale(menuListText[i]);
+        }
+    }
+
+    void Update () {
         //Waiting for the user to press any key
         if (state == MenuState.PressAnyKey)
         {
@@ -173,30 +239,22 @@ public class TitleScreen : MonoBehaviour {
         else if (state == MenuState.MainMenu)
         {
             //Check for up and down arrow input
-            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+            CheckForUpAndDownArrows();
+
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                currentIndex--;
-                currentIndex = (currentIndex < 0) ? currentIndex + menuListSize : currentIndex;
-            }
-            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
-            {
-                currentIndex++;
-                currentIndex = (currentIndex >= menuListSize) ? currentIndex - menuListSize : currentIndex;
+                MainMenuConfirm();
             }
 
             //Set the colors
-            for (int i = 0; i < menuListSize; i++)
-            {
-                if (i == currentIndex)
-                {
-                    ScaleTextUp(menuListText[i]);
-                }
-                else
-                {
-                    ScaleTextDown(menuListText[i]);
-                }
-                SetTextColorFromScale(menuListText[i]);
-            }
+            ScaleTextAndSetColors();
+        }
+
+        //At options menu
+        else if (state == MenuState.OptionsMenu)
+        {
+            CheckForUpAndDownArrows();
+            ScaleTextAndSetColors();
         }
 	}
 }
