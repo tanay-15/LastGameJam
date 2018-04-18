@@ -68,7 +68,8 @@ public class BallScript : MonoBehaviour {
 		{
 			SoundChange (3);
 			Debug.Log ("Sound Changed");
-			Destroy (other.gameObject);
+            //Destroying the ball and generating particles are handled in Ball.cs
+			//Destroy (other.gameObject);
 			//Instantiate(coinParticlesPrefab, other.gameObject.transform.position, other.gameObject.transform.rotation);
 		}
 	}
