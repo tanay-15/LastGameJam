@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/KunalLevel2Scene.unity
     guid: 47d3ce4d86663724c8085c93bc09b0a7
+  - enabled: 1
+    path: Assets/Scene/Josh_CoinCounterTest.unity
+    guid: fa688d5264dcbef4a97990e523d0a670

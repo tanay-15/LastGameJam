@@ -46,7 +46,10 @@ public class BallScript : MonoBehaviour {
 			SoundChange (1);
         }
 
-        transform.Rotate(new Vector3(0, 0, rot * Time.deltaTime * 60f));
+        Vector3 eulerRotation = new Vector3(0, 0, rot * Time.deltaTime * 60f);
+        transform.Rotate(eulerRotation);
+        Quaternion rotation = Quaternion.Euler(eulerRotation);
+        rb2d.velocity = rotation * rb2d.velocity;
     }
 
 	void SoundChange(int temp)
