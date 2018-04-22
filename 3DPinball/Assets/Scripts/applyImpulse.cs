@@ -7,6 +7,7 @@ public class applyImpulse : MonoBehaviour {
     private bool upTrigger;
     private bool downTrigger;
     private bool leftTrigger;
+    private bool jump;
     private Rigidbody rb;
 
 
@@ -36,6 +37,11 @@ public class applyImpulse : MonoBehaviour {
         {
             goLeft();
             leftTrigger = false;
+        }
+        if(jump)
+        {
+            Jump();
+            jump = false;
         }
     }
 
@@ -69,6 +75,13 @@ public class applyImpulse : MonoBehaviour {
 
         }
 
+        if (col.gameObject.tag == "Jump")
+        {
+            Debug.Log("jumping");
+            jump = true;
+
+        }
+
     }
 
     void goRight()
@@ -86,5 +99,9 @@ public class applyImpulse : MonoBehaviour {
     void goDown()
     {
         rb.AddForce(new Vector3(0, 0, 60.0f), ForceMode.Impulse);
+    }
+    void Jump()
+    {
+        rb.AddForce(new Vector3(0, 9.0f, 0), ForceMode.Impulse);
     }
 }
