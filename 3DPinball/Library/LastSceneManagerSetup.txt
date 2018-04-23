@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/ShawnScene.unity
+- path: Assets/Scenes/LevelPratik.unity
   isLoaded: 1
   isActive: 1
