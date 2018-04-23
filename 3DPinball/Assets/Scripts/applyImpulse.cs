@@ -86,19 +86,19 @@ public class applyImpulse : MonoBehaviour {
 
     void goRight()
     {
-        rb.AddForce(new Vector3(-60.0f, 0, 0), ForceMode.Impulse);
+        rb.AddForce(new Vector3(-30.0f, 0, 0), ForceMode.Impulse);
     }
     void goUp()
     {
-        rb.AddForce(new Vector3(0, 0, -60.0f), ForceMode.Impulse);
+        rb.AddForce(new Vector3(0, 0, -30.0f), ForceMode.Impulse);
     }
     void goLeft()
     {
-        rb.AddForce(new Vector3(60, 0 , 0), ForceMode.Impulse);
+        rb.AddForce(new Vector3(30, 0 , 0), ForceMode.Impulse);
     }
     void goDown()
     {
-        rb.AddForce(new Vector3(0, 0, 60.0f), ForceMode.Impulse);
+        rb.AddForce(new Vector3(0, 0, 30.0f), ForceMode.Impulse);
     }
     void Jump()
     {
