@@ -87,22 +87,22 @@ public class applyImpulse : MonoBehaviour {
     void goRight()
     {
         //rb.AddForce(new Vector3(-30.0f, 0, 0), ForceMode.Impulse);
-        rb.velocity = new Vector3(-30f, 0f, 0f);
+        rb.velocity = new Vector3(-40f, 0f, 0f);
     }
     void goUp()
     {
         //rb.AddForce(new Vector3(0, 0, -30.0f), ForceMode.Impulse);
-        rb.velocity = new Vector3(0f, 0f, -30f);
+        rb.velocity = new Vector3(0f, 0f, -40f);
     }
     void goLeft()
     {
         //rb.AddForce(new Vector3(30, 0 , 0), ForceMode.Impulse);
-        rb.velocity = new Vector3(30f, 0f, 0f);
+        rb.velocity = new Vector3(40f, 0f, 0f);
     }
     void goDown()
     {
         //rb.AddForce(new Vector3(0, 0, 30.0f), ForceMode.Impulse);
-        rb.velocity = new Vector3(0f, 0f, 30f);
+        rb.velocity = new Vector3(0f, 0f, 40f);
     }
     void Jump()
     {
