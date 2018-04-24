@@ -24,7 +24,7 @@ public class PinBallScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        rot = 0;
         if (transform.position.y < -50)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -34,27 +34,18 @@ public class PinBallScript : MonoBehaviour
             rb.AddForce(-10 * transform.forward * Time.deltaTime * 60f);
 
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
-            rot += 2f;
+            rot = 2f;
             //SoundChange(1);
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
-            rot -= 2f;
+            rot = -2f;
             //SoundChange(1);
         }
 
-        if (Input.GetKeyUp(KeyCode.RightArrow))
-        {
-            rot -= 2f;
-            //SoundChange(1);
-        }
-        if (Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            rot += 2f;
-            //SoundChange(1);
-        }
+        
 
         Vector3 eulerRotation = new Vector3(0, rot * Time.deltaTime * 60f, 0);
         transform.Rotate(eulerRotation);
