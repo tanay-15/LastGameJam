@@ -45,6 +45,8 @@ public class TitleScreen : MonoBehaviour {
     Color transparent = new Color(1f, 1f, 1f, 0f);
 
     void Start () {
+        Application.targetFrameRate = 60;
+        QualitySettings.vSyncCount = 1;
         state = MenuState.PressAnyKey;
         menuListSize = 0;
         currentIndex = 0;
@@ -75,9 +77,15 @@ public class TitleScreen : MonoBehaviour {
                 a.refreshRate == b.refreshRate);
     }
 
-    void UpdateResolutionText()
+    //Was going to be used if there was a Screen resolution event
+    //Using in update instead
+    void UpdateDisplayText()
     {
-
+        if (state == MenuState.OptionsMenu)
+        {
+            menuListText2[1].text = (Screen.fullScreen) ? "Fullscreen" : "Windowed";
+            menuListText2[2].text = (QualitySettings.vSyncCount == 1) ? "On" : "Off";
+        }
     }
 
     void SetListText(Text[] menuList, bool setListSize, params string[] text)
@@ -348,6 +356,8 @@ public class TitleScreen : MonoBehaviour {
         //At main menu
         else if (state == MenuState.MainMenu)
         {
+            //Because otherwise the title text will reset its position when rescaling the window
+            titleText.transform.position = titleTextEndPosition.position;
             //Check for up and down arrow input
             CheckForUpAndDownArrows();
 
@@ -368,6 +378,8 @@ public class TitleScreen : MonoBehaviour {
         //At options menu
         else if (state == MenuState.OptionsMenu)
         {
+            //Because otherwise the title text will reset its position when rescaling the window
+            titleText.transform.position = titleTextEndPosition.position;
             CheckForUpAndDownArrows();
             ScaleTextAndSetColors();
 
@@ -376,27 +388,48 @@ public class TitleScreen : MonoBehaviour {
                 StartCoroutine(ChangeMenu(MenuState.MainMenu));
             }
 #if !UNITY_EDITOR
+            UpdateDisplayText();
             if (menuListText[currentIndex].text == "Resolution")
             {
                 if (LeftKeyPressed())
                 {
+                    //Index of 1 is the Display setting (fullscreen/window)
+                    bool fullScreen = (menuListText2[1].text == "Fullscreen") ? true : false;
+
                     currentResolutionIndex--;
                     currentResolutionIndex = (currentResolutionIndex < 0) ? currentResolutionIndex + Screen.resolutions.Length : currentResolutionIndex;
                     menuListText2[0].text = Screen.resolutions[currentResolutionIndex].ToString();
                     Resolution newRes = Screen.resolutions[currentResolutionIndex];
 
-                    Screen.SetResolution(newRes.width, newRes.height, false);
+                    Screen.SetResolution(newRes.width, newRes.height, fullScreen);
                     Application.targetFrameRate = newRes.refreshRate;
                 }
                 if (RightKeyPressed())
                 {
+                    bool fullScreen = (menuListText2[1].text == "Fullscreen") ? true : false;
+
                     currentResolutionIndex++;
                     currentResolutionIndex = (currentResolutionIndex >= Screen.resolutions.Length) ? currentResolutionIndex - Screen.resolutions.Length : currentResolutionIndex;
                     menuListText2[0].text = Screen.resolutions[currentResolutionIndex].ToString();
                     Resolution newRes = Screen.resolutions[currentResolutionIndex];
 
-                    Screen.SetResolution(newRes.width, newRes.height, false);
+                    Screen.SetResolution(newRes.width, newRes.height, fullScreen);
                     Application.targetFrameRate = newRes.refreshRate;
+                }
+            }
+            else if (menuListText[currentIndex].text == "Display")
+            {
+                if (LeftKeyPressed() || RightKeyPressed())
+                {
+                    bool fullScreen = (menuListText2[currentIndex].text == "Fullscreen") ? false : true;
+                    Screen.SetResolution(Screen.width, Screen.height, fullScreen);
+                }
+            }
+            if (menuListText[currentIndex].text == "VSync")
+            {
+                if (LeftKeyPressed() || RightKeyPressed())
+                {
+                    QualitySettings.vSyncCount = (QualitySettings.vSyncCount == 1) ? 0 : 1;
                 }
             }
 #endif
