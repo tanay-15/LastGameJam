@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.927
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.06727933, g: 0.06306892, b: 0.04600337, a: 0.927}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0.927}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -5105,6 +5105,35 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a49973a6e41741479835fd126dba093, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &864675439 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1274585109367008, guid: 43ce946374d755541902b511fd6e33e7,
+    type: 2}
+  m_PrefabInternal: {fileID: 890527486}
+--- !u!114 &864675440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 864675439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d065572e80b9444c88bcf2b4c02010c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finalColor: {fileID: 2100000, guid: ddbddd95dbae5294a9fbb8d271280fda, type: 2}
+--- !u!135 &864675441
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 864675439}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5667634
+  m_Center: {x: -0.025306225, y: -0.7852349, z: -0.00000011920929}
 --- !u!1 &888284469
 GameObject:
   m_ObjectHideFlags: 0
@@ -5240,6 +5269,11 @@ Prefab:
       propertyPath: m_Height
       value: 16.28
       objectReference: {fileID: 0}
+    - target: {fileID: 23412330928272484, guid: 43ce946374d755541902b511fd6e33e7,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d6bce260abd5fc429b8421252cdffc6, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 43ce946374d755541902b511fd6e33e7, type: 2}
   m_IsPrefabParent: 0
