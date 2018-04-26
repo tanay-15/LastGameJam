@@ -106,6 +106,6 @@ public class applyImpulse : MonoBehaviour {
     }
     void Jump()
     {
-        rb.AddForce(new Vector3(0, 9.0f, 0), ForceMode.Impulse);
+        rb.AddForce(new Vector3(0, 12.0f, 0), ForceMode.Impulse);
     }
 }
