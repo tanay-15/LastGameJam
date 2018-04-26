@@ -8,7 +8,8 @@ public class PinBallScript : MonoBehaviour
     public static float mouseSensitivity = 6f;
     public static bool invertedMouse = false;
     Rigidbody rb;
-    float rot = 0;
+    float mouseRot = 0f;
+    float keyboardRot = 0f;
 
     public AudioSource MusicSource;
 
@@ -32,7 +33,8 @@ public class PinBallScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rot = 0;
+        mouseRot = 0f;
+        keyboardRot = 0f;
         if (transform.position.y < -50)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -42,24 +44,24 @@ public class PinBallScript : MonoBehaviour
             rb.AddForce(-10 * transform.forward * Time.deltaTime * 60f);
 
 
-        rot = -Input.GetAxis("Mouse X") * mouseSensitivity * ((invertedMouse) ? -1 : 1);
-        //if (Input.GetKey(KeyCode.RightArrow))
-        //{
-        //    rot = 2f;
-        //    //SoundChange(1);
-        //}
-        //if (Input.GetKey(KeyCode.LeftArrow))
-        //{
-        //    rot = -2f;
-        //    //SoundChange(1);
-        //}
+        mouseRot = -Input.GetAxis("Mouse X") * mouseSensitivity * ((invertedMouse) ? -1 : 1);
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+        {
+            keyboardRot = -2f;
+            //SoundChange(1);
+        }
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+        {
+            keyboardRot = 2f;
+            //SoundChange(1);
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("TitleScreen");
         }
 
-        Vector3 eulerRotation = new Vector3(0, rot * Time.deltaTime * 60f, 0);
+        Vector3 eulerRotation = new Vector3(0, (mouseRot + keyboardRot) * Time.deltaTime * 60f, 0);
         //transform.Rotate(eulerRotation);
         Quaternion rotation = Quaternion.Euler(eulerRotation);
         //rb.rotation = rotation * rb.rotation;
