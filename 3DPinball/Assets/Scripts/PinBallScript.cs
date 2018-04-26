@@ -76,7 +76,15 @@ public class PinBallScript : MonoBehaviour
             rb.AddForce(new Vector3(rb.transform.forward.x, rb.transform.forward.y, rb.transform.forward.z) * 20, ForceMode.Impulse);
             collision.gameObject.transform.localScale = new Vector3(collision.gameObject.transform.localScale.x / 2, collision.gameObject.transform.localScale.y, collision.gameObject.transform.localScale.z / 2);
             //collision.gameObject.renderer.material.color = Color.white;
+
+			SoundChange (0);
         }
+
+		if (collision.gameObject.tag == "Coin")
+		{
+
+			SoundChange (2);
+		}
 
     }
 
@@ -88,4 +96,11 @@ public class PinBallScript : MonoBehaviour
         }
 
     }
+
+	void SoundChange(int temp)
+	{
+		MusicSource.clip = MusicClips [temp];
+
+		MusicSource.Play ();
+	}
 }

@@ -10,6 +10,8 @@ TagManager:
   - rightTrigger
   - upTrigger
   - downTrigger
+  - Jump
+  - Coin
   layers:
   - Default
   - TransparentFX
