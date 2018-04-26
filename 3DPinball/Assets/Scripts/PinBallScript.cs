@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PinBallScript : MonoBehaviour
 {
-
+    public static float mouseSensitivity = 6f;
+    public static bool invertedMouse = false;
     Rigidbody rb;
     float rot = 0;
 
@@ -15,10 +16,17 @@ public class PinBallScript : MonoBehaviour
 
     [SerializeField] GameObject coinParticlesPrefab;
 
+    static PinBallScript()
+    {
+        mouseSensitivity = 6f;
+        invertedMouse = false;
+    }
+
     // Use this for initialization
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -34,22 +42,28 @@ public class PinBallScript : MonoBehaviour
             rb.AddForce(-10 * transform.forward * Time.deltaTime * 60f);
 
 
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            rot = 2f;
-            //SoundChange(1);
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            rot = -2f;
-            //SoundChange(1);
-        }
+        rot = -Input.GetAxis("Mouse X") * mouseSensitivity * ((invertedMouse) ? -1 : 1);
+        //if (Input.GetKey(KeyCode.RightArrow))
+        //{
+        //    rot = 2f;
+        //    //SoundChange(1);
+        //}
+        //if (Input.GetKey(KeyCode.LeftArrow))
+        //{
+        //    rot = -2f;
+        //    //SoundChange(1);
+        //}
 
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("TitleScreen");
+        }
 
         Vector3 eulerRotation = new Vector3(0, rot * Time.deltaTime * 60f, 0);
-        transform.Rotate(eulerRotation);
+        //transform.Rotate(eulerRotation);
         Quaternion rotation = Quaternion.Euler(eulerRotation);
+        //rb.rotation = rotation * rb.rotation;
+        rb.MoveRotation(rb.rotation * rotation);
         rb.velocity = rotation * rb.velocity;
     }
 

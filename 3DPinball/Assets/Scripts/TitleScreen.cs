@@ -27,6 +27,9 @@ public class TitleScreen : MonoBehaviour {
     [SerializeField] AnimationCurve titleTextMoveCurve;
     [SerializeField] string gameScene;
 
+    float minSensitivity = 1f;
+    float maxSensitivity = 10f;
+
     Resolution currentResolution
     {
         get
@@ -36,7 +39,7 @@ public class TitleScreen : MonoBehaviour {
     }
 
     string[] MainMenuListText = { "Start", "Options", "Exit" };
-    string[] optionsMenuListText = { "Resolution", "Display", "VSync" };
+    string[] optionsMenuListText = { "Resolution", "Display", "VSync", "Mouse sensitivity" };
 
     int menuListSize;
     int currentIndex;
@@ -156,6 +159,7 @@ public class TitleScreen : MonoBehaviour {
                 string resolutionString = "Not available";
                 string displayString = "Not available";
                 string vSyncString = "Not available";
+                string sensitivityText = PinBallScript.mouseSensitivity.ToString();
 #if !UNITY_EDITOR
                 resolutionString = currentResolution.ToString();//string.Format("{0}x{1}, {2}Hz", Screen.width.ToString(), Screen.height.ToString(), Screen.currentResolution.refreshRate.ToString());
                 displayString = Screen.fullScreen ? "Fullscreen" : "Windowed";
@@ -164,7 +168,7 @@ public class TitleScreen : MonoBehaviour {
                 state = MenuState.Transition;
                 yield return MoveCurrentMenu(-1, true);
                 SetListText(menuListText, true, optionsMenuListText);
-                SetListText(menuListText2, false, resolutionString, displayString, vSyncString);
+                SetListText(menuListText2, false, resolutionString, displayString, vSyncString, sensitivityText);
                 yield return MoveCurrentMenu(1, false);
                 currentIndex = 0;
                 state = MenuState.OptionsMenu;
@@ -433,6 +437,19 @@ public class TitleScreen : MonoBehaviour {
                 }
             }
 #endif
+            if (menuListText[currentIndex].text == "Mouse sensitivity")
+            {
+                if (LeftKeyPressed())
+                {
+                    PinBallScript.mouseSensitivity = Mathf.Clamp(PinBallScript.mouseSensitivity - 1, minSensitivity, maxSensitivity);
+                    menuListText2[currentIndex].text = PinBallScript.mouseSensitivity.ToString();
+                }
+                if (RightKeyPressed())
+                {
+                    PinBallScript.mouseSensitivity = Mathf.Clamp(PinBallScript.mouseSensitivity + 1, minSensitivity, maxSensitivity);
+                    menuListText2[currentIndex].text = PinBallScript.mouseSensitivity.ToString();
+                }
+            }
         }
     }
 }
