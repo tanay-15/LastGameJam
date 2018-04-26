@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/TanayTest.unity
+- path: Assets/Scenes/MergedTest.unity
   isLoaded: 1
   isActive: 1
