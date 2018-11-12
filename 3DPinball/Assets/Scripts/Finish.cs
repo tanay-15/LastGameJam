@@ -23,8 +23,9 @@ public class Finish : MonoBehaviour {
 
 
             if(SceneManager.GetActiveScene().name == "LevelPratik2")
+                SceneManager.LoadScene("ShawnLevel");
+            if (SceneManager.GetActiveScene().name == "ShawnLevel")
                 SceneManager.LoadScene("MergedTest");
-
             if (SceneManager.GetActiveScene().name == "MergedTest")
                 SceneManager.LoadScene("TitleScreen");
         }

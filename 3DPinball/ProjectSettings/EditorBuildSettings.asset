@@ -9,8 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/TitleScreen.unity
     guid: 69b8ffe2bdbc3a04eb7eecfdb6683da7
   - enabled: 1
+    path: Assets/Scenes/LevelPratik2.unity
+    guid: 653a9d81fa2c72f48a37ff60f0e7bf8b
+  - enabled: 1
+    path: Assets/Scenes/ShawnLevel.unity
+    guid: 30d7e02576d4a174f9759119d68aef03
+  - enabled: 1
     path: Assets/Scenes/MergedTest.unity
     guid: f5fe8e3c8f5af334e9fdb357f919ffd2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LevelPratik.unity
     guid: eb84f9a38ef9927469e92581099ef484
